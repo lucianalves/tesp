@@ -1,5 +1,5 @@
 
-package br.unibh.teste01;
+package br.unibh.teste01.entidades;
 
 import java.math.BigDecimal;
 
@@ -17,6 +17,7 @@ public class Professor extends Pessoa {
 	 * Variáveis de instância
 	 */
 	private BigDecimal salario;
+	public static Double BONUS =0.1D;
 
 	
 	// Construtores
