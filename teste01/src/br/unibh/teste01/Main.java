@@ -3,9 +3,11 @@ package br.unibh.teste01;
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.util.Date;
+import java.util.List;
 
 import br.unibh.teste01.entidades.Aluno;
 import br.unibh.teste01.entidades.Professor;
+import br.unibh.teste01.persistencia.AlunoDAO;
 import br.unibh.teste01.persistencia.JDBCUtil;
 
 public class Main {
@@ -42,6 +44,13 @@ public class Main {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			
+			AlunoDAO dao = new AlunoDAO();
+			List<Aluno> lista = dao.findAll();
+			for (Aluno a: lista){
+				
+				System.out.println(a);
+			}
 		}
 		
 	}
