@@ -37,6 +37,17 @@ public class Aluno extends Pessoa{
 		this.date = date;
 	}
 
+	public String getMatricula() {
+		
+		return matricula;
+	}
+
+	public Date getDataAniversario() {
+		
+		return null;
+		
+	}
+
 
 
 }

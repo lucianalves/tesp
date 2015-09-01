@@ -14,10 +14,17 @@ public class JDBCUtil {
 		return con;
 	}
 
-	public static void closeConnection() throws Exception {
+	public static void closeConnection() {
+		
+	try {
 		if (con != null && !con.isClosed()) {
 
 			con.close();
 		}
+		
+		
+	} catch (Exception e) {
+		e.printStackTrace();
+	}	
 	}
 }
