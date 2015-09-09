@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 
 /**
  * Classe concreta de professor
- *@author Alexandre
+ *@author Luciana
  *@version 1.0
  *@since 2015
  */
