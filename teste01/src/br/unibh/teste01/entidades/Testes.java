@@ -7,7 +7,7 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 
-import br.unibh.teste01.persistence.AlunoDAO;
+import br.unibh.teste01.persistencia.AlunoDAO;
 import br.unibh.teste01.persistencia.ProfessorDAO;
 
 //Classe aluno

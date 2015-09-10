@@ -1,4 +1,4 @@
-package br.unibh.teste01.persistence;
+package br.unibh.teste01.persistencia;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,8 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.unibh.teste01.entidades.Aluno;
-import br.unibh.teste01.persistencia.DAO;
-import br.unibh.teste01.persistencia.JDBCUtil;
 
 public class AlunoDAO implements DAO<Aluno, Long> {
 

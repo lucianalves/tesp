@@ -7,7 +7,7 @@ import java.util.List;
 
 import br.unibh.teste01.entidades.Aluno;
 import br.unibh.teste01.entidades.Professor;
-import br.unibh.teste01.persistence.AlunoDAO;
+import br.unibh.teste01.persistencia.AlunoDAO;
 import br.unibh.teste01.persistencia.JDBCUtil;
 
 public class Main {
