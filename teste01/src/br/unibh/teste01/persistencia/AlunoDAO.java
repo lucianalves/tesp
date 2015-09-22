@@ -66,7 +66,7 @@ public class AlunoDAO implements DAO<Aluno, Long> {
 		try {
 
 			PreparedStatement p = JDBCUtil.getConnection().prepareStatement(
-					"insert into tb_aluno (nome, cpf, matricula, data_aniversario" + "values (?,?,?,?,?)");
+					"insert into tb_aluno (nome, cpf, matricula, data_aniversario) values (?,?,?,?)");
 
 			p.setString(1, t.getNome());
 			p.setString(2, t.getCpf());
@@ -92,6 +92,7 @@ public class AlunoDAO implements DAO<Aluno, Long> {
 			PreparedStatement p = JDBCUtil.getConnection().prepareStatement("delete from tb_aluno where id = ?");
 
 			p.setLong(1, t.getId());
+			p.executeUpdate();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -109,12 +110,13 @@ public class AlunoDAO implements DAO<Aluno, Long> {
 		try {
 
 			PreparedStatement p = JDBCUtil.getConnection().prepareStatement(
-					"Update tb_aluno set nome = ?, cpf =?, matricula = ?, data_aniversario = ?" + "where id =?");
+					"Update tb_aluno set nome = ?, cpf =?, matricula = ?, data_aniversario = ? where id =?");
 
 			p.setString(1, t.getNome());
 			p.setString(2, t.getCpf());
 			p.setString(3, t.getMatricula());
 			p.setString(4, df.format(t.getDataAniversario()));
+			p.setLong(5, t.getId());
 			p.executeUpdate();
 
 		} catch (Exception e) {

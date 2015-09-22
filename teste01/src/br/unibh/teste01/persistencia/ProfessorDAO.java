@@ -67,7 +67,7 @@ public class ProfessorDAO implements DAO<Professor, Long> {
 		try {
 
 			PreparedStatement p = JDBCUtil.getConnection().prepareStatement(
-					"insert into tb_professor (nome, cpf, salario" + "values (?,?,?,)");
+					"insert into tb_professor (nome, cpf, salario) values (?,?,?)");
 
 			p.setString(1, t.getNome());
 			p.setString(2, t.getCpf());
@@ -92,11 +92,12 @@ public class ProfessorDAO implements DAO<Professor, Long> {
 		try {
 
 			PreparedStatement p = JDBCUtil.getConnection().prepareStatement(
-					"Update tb_professor set nome = ?, cpf =?, salario = ?,"+ "where id =?");
+					"Update tb_professor set nome = ?, cpf =?, salario = ? where id =?");
 
 			p.setString(1, t.getNome());
 			p.setString(2, t.getCpf());
 			p.setBigDecimal(3, t.getSalario());
+			p.setLong(4, t.getId());
 			p.executeUpdate();
 
 		} catch (Exception e) {
@@ -120,7 +121,7 @@ public class ProfessorDAO implements DAO<Professor, Long> {
 			PreparedStatement p = JDBCUtil.getConnection().prepareStatement("delete from tb_professor where id = ?");
 
 			p.setLong(1, t.getId());
-
+			p.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 
