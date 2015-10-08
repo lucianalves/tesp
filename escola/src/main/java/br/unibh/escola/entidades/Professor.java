@@ -3,6 +3,11 @@ package br.unibh.escola.entidades;
 
 import java.math.BigDecimal;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.validation.constraints.Size;
+
 /**
  * Classe concreta de professor
  *@author Luciana
@@ -10,13 +15,22 @@ import java.math.BigDecimal;
  *@since 2015
  */
 
+@Entity
+@Table(name="TB_PROFESSOR")
+
 public class Professor extends Pessoa {
 	
 	// Vari�veis de Inst�ncia
 	/**
 	 * Vari�veis de inst�ncia
+	 * 
+	 * 
 	 */
+	@Column(columnDefinition="DECIMAL(14,2)",nullable=true)
+	@Size(min=500,max=100000)
 	private BigDecimal salario;
+	
+	
 	public static Double BONUS =0.1D;
 
 	
