@@ -31,7 +31,7 @@ public abstract class Pessoa {
 	
 	@NotBlank
 	@Size(min=5,max=100)
-	@Pattern(regexp="[A-Za-zÀ-ú]*", message="forneça apenas caracteres, contendo acentuação")
+	@Pattern(regexp="[A-Za-zÀ-ú ]*", message="forneça apenas caracteres, contendo acentuação")
 	@Column(length=100,nullable=false, columnDefinition="varchar (100)")
 	
 	private String nome;
