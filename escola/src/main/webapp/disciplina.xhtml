@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/templates/default.xhtml">
+	<ui:define name="content">
+		<h:panelGroup id="cadastro">
+			<h:form id="cad" rendered="#{disciplinamb.disciplina != null}">
+				<p:messages />
+
+				<p:tabView>
+					<p:tab title="Geral">
+						<h:panelGrid columns="2" cellpadding="10">
+							<p:outputLabel value="Nome " />
+							<p:inputText id="nome" value="#{disciplinamb.disciplina.nome}"
+								size="50" />
+							<p:message for="nome" errorClass="invalid" />
+						</h:panelGrid>
+
+						<h:panelGrid columns="2" cellpadding="10">
+							<p:outputLabel value="Curso " />
+							<p:inputText id="curso" value="#{disciplinamb.disciplina.curso}"
+								size="50" />
+
+							<p:message for="nome" errorClass="invalid" />
+						</h:panelGrid>
+
+
+						<h:panelGrid columns="2" cellpadding="10">
+							<p:outputLabel value="Carga Horária " />
+							<p:spinner id="cargaHoraria"
+								value="#{disciplinamb.disciplina.cargaHoraria}" size="50" />
+							<p:message for="cargaHoraria" errorClass="invalid" />
+						</h:panelGrid>
+
+
+						<h:panelGrid columns="2" cellpadding="10">
+							<p:outputLabel value="Tipo " />
+							<p:selectOneRadio id="tipo"
+								value="#{disciplinamb.disciplina.tipo}" columns="3"
+								layout="grid">
+								<f:selectItem itemLabel="Presencial" itemValue="1"></f:selectItem>
+								<f:selectItem itemLabel="À distância" itemValue="2"></f:selectItem>
+								<f:selectItem itemLabel="Presencial e à distância" itemValue="3"></f:selectItem>
+
+							</p:selectOneRadio>
+							<p:message for="tipo" errorClass="invalid" />
+						</h:panelGrid>
+
+						<h:panelGrid columns="2" cellpadding="10">
+							<p:selectOneMenu id="sala"
+								value="#{disciplinamb.disciplina.sala}" enableManualInput="true"
+								defaultLabel="digite para filtrar" converter="ConversorSala">
+								<f:selectItems value="#{disciplinamb.listaSalas}" var="sala"
+									itemValue="#{sala}"
+									itemLabel="#{sala.codigo} (capacidade=#{sala.capacidade})" />
+							</p:selectOneMenu>
+						</h:panelGrid>
+
+
+
+						<h:panelGrid columns="2" cellpadding="10">
+							<p:selectOneMenu id="professor"
+								value="#{disciplinamb.disciplina.professor}"
+								enableManualInput="true" defaultLabel="digite para filtrar"
+								converter="ConversorProfessor">
+								<f:selectItems value="#{disciplinamb.listaProfessores}"
+									var="professor" itemValue="#{professor}"
+									itemLabel="#{professor.nome}" />
+							</p:selectOneMenu>
+						</h:panelGrid>
+					</p:tab>
+
+
+					<p:tab title="Ementa">
+						<h:panelGrid columns="2" cellpadding="10">
+							<p:outputLabel value="Ementa " />
+							<p:inputTextarea id="ementa"
+								value="#{disciplinamb.disciplina.ementa}" cols="70" />
+
+							<p:message for="ementa" errorClass="invalid" />
+						</h:panelGrid>
+
+
+						<h:panelGrid columns="2" cellpadding="10">
+							<p:outputLabel value="Bibliografia " />
+							<p:inputTextarea id="bibliografia"
+								value="#{disciplinamb.disciplina.bibliografia}" cols="70" />
+
+							<p:message for="bibliografia" errorClass="invalid" />
+						</h:panelGrid>
+
+
+						<h:panelGrid columns="2" cellpadding="10">
+							<p:outputLabel value="Distribuição das Avaliações " />
+							<p:inputTextarea id="distribuicaoAvaliacao"
+								value="#{disciplinamb.disciplina.distribuicaoAvaliacao}"
+								cols="70" />
+
+							<p:message for="distribuicaoAvaliacao" errorClass="invalid" />
+						</h:panelGrid>
+
+						<h:panelGrid columns="2" cellpadding="10">
+							<p:outputLabel value="Observação " />
+							<p:inputTextarea id="observacao"
+								value="#{disciplinamb.disciplina.observacao}" cols="70" />
+							<p:message for="observacao" errorClass="invalid" />
+						</h:panelGrid>
+
+					</p:tab>
+
+
+					<p:tab title="Alunos">
+						<h:panelGrid columns="2" cellpadding="10">
+							<p:pickList id="alunos" value="#{disciplinamb.alunos}"
+								var="aluno" converter="ConversorAluno" itemValue="#{aluno}"
+								itemLabel="#{aluno}" showSourceControls="true"
+								showTargetControls="true">
+								<f:facet name="sourceCaption">Alunos disponíveis</f:facet>
+								<f:facet name="targetCaption">Alunos selecionados</f:facet>
+								<p:column style="width:75%;">
+									<h:outputText value="#{aluno.nome}" />
+								</p:column>
+							</p:pickList>
+						</h:panelGrid>
+					</p:tab>
+				</p:tabView>
+
+
+				<p:commandButton id="gravar" action="#{disciplinamb.gravar}"
+					value="Gravar" update="cadastro" ajax="false" />
+				<p:commandButton id="cancelar" action="#{disciplinamb.cancelar}"
+					value="Cancelar" immediate="true" update="cadastro,pesquisa"
+					ajax="false" />
+
+			</h:form>
+		</h:panelGroup>
+		<p:panel id="pesquisa" rendered="#{disciplinamb.disciplina == null}">
+			<h:outputText value="Lista de Disciplinas"
+				style="font-size:18px;font-weight:bold" />
+			<h:form id="arg">
+				<p:panelGrid columns="4" styleClass="ui-noborder">
+					<p:outputLabel value="Nome:" />
+					<p:inputText id="nomeArg" value="#{disciplinamb.nomeArg}" />
+					<p:commandButton id="pesquisar" action="#{disciplinamb.pesquisar}"
+						value="Pesquisar" update="pesquisa" ajax="false" />
+					<p:commandButton id="novo" action="#{disciplinamb.novo}"
+						value="Novo" update="pesquisa,cadastro" ajax="false" />
+				</p:panelGrid>
+			</h:form>
+			<h:panelGroup rendered="#{empty disciplinamb.disciplinas}">
+				<h:outputText value="Nenhum disciplina existe" />
+			</h:panelGroup>
+			<h:form id="edt">
+				<p:dataTable id="tabela" var="disciplina"
+					value="#{disciplinamb.disciplinas}"
+					rendered="#{not empty disciplinamb.disciplinas}"
+					onrowclick="selectRow('#{disciplina.id}')" paginator="true"
+					rows="15">
+					<p:column headerText="Id" width="10%" sortBy="#{disciplina.id}">
+						<div align="center">
+							<h:outputText value="#{disciplina.id}" />
+						</div>
+					</p:column>
+					<p:column headerText="Nome" width="35%" sortBy="#{disciplina.nome}">
+						<h:outputText value="#{disciplina.nome}" />
+					</p:column>
+					<p:column headerText="Curso" width="20%">
+						<div align="center">
+							<h:outputText value="#{disciplina.curso}" />
+						</div>
+					</p:column>
+
+					<p:column headerText="Carga Horária" width="20%">
+						<div align="center">
+							<h:outputText value="#{disciplina.cargaHoraria}" />
+						</div>
+					</p:column>
+
+					<p:column headerText="Tipo" width="20%">
+						<div align="center">
+							<h:outputText value="#{disciplina.tipo}" />
+						</div>
+					</p:column>
+
+					<p:column headerText="Professor" width="20%">
+						<div align="center">
+							<h:outputText value="#{disciplina.professor.nome}" />
+						</div>
+					</p:column>
+
+					<p:column headerText="Comandos" width="20%">
+						<div align="center">
+							<p:commandLink id="editar"
+								action="#{disciplinamb.editar(disciplina.id)}" value="Editar"
+								update="pesquisa" ajax="false" />
+							<h:outputText value=" " />
+							<p:commandLink id="excluir"
+								action="#{disciplinamb.excluir(disciplina.id)}" value="Excluir"
+								update="pesquisa" ajax="false" />
+						</div>
+					</p:column>
+				</p:dataTable>
+				<p:messages />
+			</h:form>
+		</p:panel>
+	</ui:define>
+</ui:composition>
